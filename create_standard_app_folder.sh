@@ -9,4 +9,3 @@ if [ ! -d "$HOME/Desktop/Standard Apps" ]; then
   end tell
 END_SCRIPT
 fi
-
