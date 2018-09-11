@@ -1,0 +1,2 @@
+/Applications/Chess.app
+/Applications/Google Chrome.app

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 jha_app_dir="$HOME/Desktop/Standard Apps"
+app_list_file="./applist.txt"
 
 # Function create_alias
 #
@@ -8,10 +9,10 @@ jha_app_dir="$HOME/Desktop/Standard Apps"
 # passed as argument 2
 
 create_alias () {
+  # Extract the filename without extension
   file_alias=$(basename -- "$1")
   file_alias="${file_alias%.*}"
-  echo $file_alias
-  ls -la "$jha_app_dir/$file_alias"
+  # Check to see if alias file exists already and if not, create it.
   if [ ! -f "$jha_app_dir/$file_alias" ]; then
     echo "Creating alias for $1 at $2"
     osascript <<END_SCRIPT
@@ -22,11 +23,18 @@ END_SCRIPT
   fi
 }
 
+# Function process_app_list
+process_app_list () {
+  while read app_item ; do
+    create_alias "$app_item" "$jha_app_dir"
+  done < $app_list_file
+}
+
+# main script
 if [ ! -d "$jha_app_dir" ]; then
   mkdir "$jha_app_dir"
 fi
 
-create_alias "/Applications/Chess.app" "$jha_app_dir"
-create_alias "/Applications/Google Chrome.app" "$jha_app_dir"
+process_app_list
 
-  #chmod -w "$jha_app_dir"
+#chmod -w "$jha_app_dir"
