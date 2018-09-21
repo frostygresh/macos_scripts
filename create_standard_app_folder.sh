@@ -1,7 +1,8 @@
 #!/bin/bash
 
 jha_app_dir="$HOME/Desktop/Standard Apps"
-app_list_file="./applist.txt"
+#app_list_file="./applist.txt"
+app_list_file="smb://mmocoabmgt01.jhacorp.com/PackageSource/TechServe/Aliases.txt"
 
 # Function create_alias
 #
