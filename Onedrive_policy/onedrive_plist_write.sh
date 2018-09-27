@@ -1,6 +1,6 @@
 onedrivePlist="$HOME/Library/Preferences/com.microsoft.OneDrive.plist"
 
-/usr/libexec/PlistBuddy -c "Add :HideDockIcon bool False" $onedrivePlist
+#/usr/libexec/PlistBuddy -c "Add :HideDockIcon bool False" $onedrivePlist
 /usr/libexec/PlistBuddy -c "Add :DisablePersonalSync bool True" $onedrivePlist
 /usr/libexec/PlistBuddy -c "Add :TeamSiteSyncPreview bool True" $onedrivePlist
 /usr/libexec/PlistBuddy -c "Add :Tenants dict" $onedrivePlist
@@ -9,7 +9,7 @@ onedrivePlist="$HOME/Library/Preferences/com.microsoft.OneDrive.plist"
 
 onedrivePlist="$HOME/Library/Containers/com.microsoft.OneDrive-mac/Data/Library/Preferences/com.microsoft.OneDrive-mac.plist"
 
-/usr/libexec/PlistBuddy -c "Add :HideDockIcon bool False" $onedrivePlist
+#/usr/libexec/PlistBuddy -c "Add :HideDockIcon bool False" $onedrivePlist
 /usr/libexec/PlistBuddy -c "Add :DisablePersonalSync bool True" $onedrivePlist
 /usr/libexec/PlistBuddy -c "Add :TeamSiteSyncPreview bool True" $onedrivePlist
 /usr/libexec/PlistBuddy -c "Add :Tenants dict" $onedrivePlist
