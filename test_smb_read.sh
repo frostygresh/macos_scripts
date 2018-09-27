@@ -1,15 +1,18 @@
 #!/bin/bash
 
-jha_app_dir="$HOME/Desktop/Standard Apps"
-#app_list_file="./applist.txt"
-app_list_file="smb://mmocoabmgt01.jhacorp.com/PackageSource/TechServe/Aliases.txt"
+app_list_share="//mmocoabmgt01.jhacorp.com/PackageSource"
+app_list_mountpoint="$HOME/Techserve"
+app_list_file="$app_list_mountpoint/TechServe/Aliases.txt"
 
 # Function process_app_list
 process_app_list () {
+  mkdir $app_list_mountpoint
+  mount -t smbfs $app_list_share $app_list_mountpoint
   while read app_item ; do
     echo $app_item
-  #  create_alias "$app_item" "$jha_app_dir"
   done < $app_list_file
+  umount $app_list_mountpoint
+  rmdir $app_list_mountpoint
 }
 
 # main script
