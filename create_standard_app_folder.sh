@@ -31,7 +31,8 @@ process_app_list () {
   done < $app_list_file
 }
 
-# main script
+# extract_files script
+extract_files () {
 openssl base64 -d <<MYSETICON > /tmp/SetFileIcon
 yv66vgAAAAIAAAAHAAAAAwAAEAAAAFc0AAAADAAAABIAAAAAAABwAAAAR6AAAAAM
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -1674,8 +1675,10 @@ X9RQBPRUH2iL1/UUfaIvX9RQBPRUH2iL1/UUfaIvX9RQBPRVQ3tvkKHXceg3Dn9a
 eZmyVVSWAzjB/Q8D9aALFRPMiDrk03bLIOTtH+P+fekjt0Q7jlm9T2+g6CgBu2SV
 jvyq9j3/AA/xqyqhQFXgClooAKKKKAP/2Q==
 MYICON
+}
 
 if [ ! -d "$jha_app_dir" ]; then
+  extract_files
   mkdir "$jha_app_dir"
   /tmp/SetFileIcon -image /tmp/Tech_Services.jpg -file "$jha_app_dir"
 fi
