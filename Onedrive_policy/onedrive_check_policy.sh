@@ -1,1 +1,1 @@
-defaults read ~/Library/Containers/com.microsoft.OneDrive-mac/Data/Library/Preferences/com.microsoft.OneDrive-mac.plist DisablePersonalSync
+defaults read ~/Library/Preferences/com.microsoft.OneDrive.plist DisablePersonalSync
