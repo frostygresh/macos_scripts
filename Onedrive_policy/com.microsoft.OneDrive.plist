@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BITApplicationDidEnterBackgroundTime</key>
+	<real>1538599011.715395</real>
+	<key>BITApplicationWasLaunched</key>
+	<true/>
+	<key>DisablePersonalSync</key>
+	<true/>
+	<key>HockeySDKAutomaticallySendCrashReports</key>
+	<false/>
+	<key>HockeySDKCrashReportActivated</key>
+	<true/>
+	<key>OpenAtLogin</key>
+	<integer>1</integer>
+	<key>TeamSiteSyncPreview</key>
+	<true/>
+	<key>Tenants</key>
+	<dict>
+		<key>53049b77-3e8f-4792-977f-0a3e5f23891b</key>
+		<dict>
+			<key>DefaultFolder</key>
+			<string>file:////$HOME/OneDrive/</string>
+		</dict>
+	</dict>
+	<key>UpdateRingSettingsLastSuccess</key>
+	<integer>17807</integer>
+</dict>
+</plist>
