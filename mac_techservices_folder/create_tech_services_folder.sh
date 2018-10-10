@@ -1,10 +1,10 @@
 #!/bin/bash
 
 jha_app_dir="$HOME/Desktop/Tech Services"
-supportFilesPath="//username:password@mmoabmgt01/PackageSource"
+supportFilesPath="//mmocoabmgt01/PackageSource"
 supportMountPoint="$HOME/tmpmnt"
 #app_list_file="./applist.txt"
-app_list_file="$supportMountPoint/techservices_utils/Aliases.txt"
+app_list_file="$supportMountPoint/techservices_utils/applist.txt"
 
 # Function create_alias
 #
@@ -28,37 +28,39 @@ END_SCRIPT
 
 # Function process_app_list
 process_app_list () {
+  awk '{ sub("\r$", ""); print }' $app_list_file > /tmp/applist.txt
   while read app_item ; do
+    echo "Item is $app_item"
     create_alias "$app_item" "$jha_app_dir"
-  done < $app_list_file
-  cp -f $mountPoint/techservices_utils/md5sum.txt $jha_app_dir/md5sum.txt
-  chflags hidden $jha_app_dir/md5sum.txt
+  done < /tmp/applist.txt
+  cp -f $supportMountPoint/techservices_utils/md5sum.txt "$jha_app_dir/md5sum.txt"
+  chflags hidden "$jha_app_dir/md5sum.txt"
 }
 
 # Function to mount smb file system
-mount_smbfs_share ($path, $mountPoint) {
-  if [ -d $mountPoint ]; then
-    mkdir $mountPoint
+mount_smbfs_share () {
+  if [ ! -d $2 ]; then
+    mkdir $2
   fi
-  mount_smbfs $path $mountPoint
+  mount_smbfs $1 $2
 }
 
 # unmount the file system at the mount point provided.
-umount_filesystem ($mountPoint) {
-  umount $mountPoint
-  rmdir $mountPoint
+umount_filesystem () {
+  umount $1
+  rmdir $1
 }
 
 # Main script
 mount_smbfs_share $supportFilesPath $supportMountPoint
 if [ ! -d "$jha_app_dir" ]; then
   mkdir "$jha_app_dir"
-  $mountPoint/techservices_utils/SetFileIcon -image $mountPoint/techservices_utils/Tech_Services.jpg -file "$jha_app_dir"
+  $supportMountPoint/techservices_utils/SetFileIcon -image $supportMountPoint/techservices_utils/Tech_Services.jpg -file "$jha_app_dir"
   process_app_list
 else
   if [ -f "$jha_app_dir/md5sum.txt" ]; then
-    read localCheckSum < $jha_app_dir/md5sum.txt
-    remoteCheckSum=$(md5 -q $mountPoint/techservices_utils/applist.txt)
+    read localCheckSum < "$jha_app_dir/md5sum.txt"
+    remoteCheckSum=$(md5 -q $supportMountPoint/techservices_utils/applist.txt)
     if [ localCheckSum != remoteCheckSum ]; then
       process_app_list
     fi
