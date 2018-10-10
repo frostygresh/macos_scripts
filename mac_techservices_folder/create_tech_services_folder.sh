@@ -33,7 +33,7 @@ process_app_list () {
     echo "Item is $app_item"
     create_alias "$app_item" "$jha_app_dir"
   done < /tmp/applist.txt
-  cp -f $supportMountPoint/techservices_utils/md5sum.txt "$jha_app_dir/md5sum.txt"
+  md5 -q $supportMountPoint/techservices_utils/applist.txt > "$jha_app_dir/md5sum.txt"
   chflags hidden "$jha_app_dir/md5sum.txt"
 }
 
@@ -61,8 +61,10 @@ else
   if [ -f "$jha_app_dir/md5sum.txt" ]; then
     read localCheckSum < "$jha_app_dir/md5sum.txt"
     remoteCheckSum=$(md5 -q $supportMountPoint/techservices_utils/applist.txt)
-    if [ localCheckSum != remoteCheckSum ]; then
+    if [ $localCheckSum != $remoteCheckSum ]; then
       process_app_list
+    else
+      echo "No changes."
     fi
   fi
 fi
