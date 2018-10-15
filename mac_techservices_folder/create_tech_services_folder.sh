@@ -1,7 +1,7 @@
 #!/bin/bash
 
 jha_app_dir="$HOME/Desktop/Tech Services"
-supportFilesPath="//mmocoabmgt01/PackageSource"
+supportFilesPath="//svc-lanrev-CIFS-R@mmocoabmgt01/PackageSource"
 supportMountPoint="$HOME/tmpmnt"
 #app_list_file="./applist.txt"
 app_list_file="$supportMountPoint/techservices_utils/applist.txt"
@@ -59,7 +59,9 @@ mount_smbfs_share () {
   if [ ! -d $2 ]; then
     mkdir $2
   fi
-  mount_smbfs $1 $2
+  mount_smbfs $1 $2 << PWDEOF
+S?4H*P5v5v=f
+PWDEOF
 }
 
 # unmount the file system at the mount point provided.
@@ -81,7 +83,6 @@ inventory_folder () {
 
 # Main script
 mount_smbfs_share $supportFilesPath $supportMountPoint
-echo $jha_app_dir
 if [ ! -d "$jha_app_dir" ]; then
   mkdir "$jha_app_dir"
   $supportMountPoint/techservices_utils/SetFileIcon -image $supportMountPoint/techservices_utils/Tech_Services.jpg -file "$jha_app_dir"
